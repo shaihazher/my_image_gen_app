@@ -4,7 +4,7 @@ from diffusers import StableDiffusionXLPipeline
 from diffusers import DDIMScheduler, EulerAncestralDiscreteScheduler, DPMSolverMultistepScheduler
 import runpod
 import subprocess
-import nest_asyncio
+#import nest_asyncio
 import base64
 from PIL import Image
 from io import BytesIO
