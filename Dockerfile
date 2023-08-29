@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y wget
 
 # Copy requirements.txt and install dependencies
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install -v -r requirements.txt
 
 # Copy all other files and directories
 COPY . .
