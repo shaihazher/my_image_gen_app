@@ -16,6 +16,9 @@ RUN pip install gdown
 # Copy all other files and directories
 COPY . .
 
+# Make your inference_gfpgan.py script executable
+RUN chmod +x GFPGAN/inference_gfpgan.py
+
 RUN gdown --id 12Qhp1wNRlhORZ2JO_HliL5pP1w-WNzpQ -O /epicrealism_naturalSinRC1VAE.safetensors
 RUN gdown --id 1pQXZl-0qLDCy1hC0wVvvEEwJtPtr-ODu -O /GFPGAN/weights/detection_Resnet50_Final.pth
 RUN gdown --id 1_vUNbqM5v6cbPVVh8KUCKeD3xTdtaPdv -O /GFPGAN/weights/parsing_parsenet.pth
