@@ -38,10 +38,10 @@ def gen_image(jobs):
 
         #protovision - 896x1152 and nightvision 832x1216
     image = pipe(prompt= prompt, negative_prompt=negative_prompt, num_images_per_prompt = 1, 
-                 guidance_scale = 3, height = 1216, width = 832, num_inference_steps=35).images
+                 guidance_scale = 3, height = 832, width = 576, num_inference_steps=35).images
     
-    image[0].save(str(job_input["id"])+".png")
-    img_name = str(job_input["id"])+".png"
+    image[0].save(str(job_input["prompt"])+".png")
+    img_name = str(job_input["prompt"])+".png"
 
     cmd = ['python', 'GFPGAN/inference_gfpgan.py', '-i', img_name, '-o', 'results', '-v', '1.3', '-s', '2']
 
