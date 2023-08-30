@@ -10,6 +10,18 @@ from PIL import Image
 from io import BytesIO
 #nest_asyncio.apply()
 
+pipe = StableDiffusionXLPipeline.from_single_file("epicrealism_naturalSinRC1VAE.safetensors", 
+                                                   safety_checker = None, requires_safety_checker = False, 
+                                                   use_safetensors=True, custom_pipeline="lpw_stable_diffusion_xl")
+#pipe.unet.load_attn_procs(lora_path)
+pipe = pipe.to("cuda")
+pipe.enable_attention_slicing()
+
+pipe.load_textual_inversion("UnrealisticDream.pt")
+#pipe.scheduler.config["use_karras_sigmas"] = True
+pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
+pipe.safety_checker = None
+pipe.requires_safety_checker = False
 def gen_image(jobs):
     job_input = jobs["input"]
     
@@ -23,18 +35,6 @@ def gen_image(jobs):
     {pos}, with cleavage and (curvy fat hips) exposed"""
     negative_prompt = nprompt.format(neg = negative_prompt)
     prompt = pprompt.format(pos = prompt)
-    pipe = StableDiffusionXLPipeline.from_single_file("epicrealism_naturalSinRC1VAE.safetensors", 
-                                                   safety_checker = None, requires_safety_checker = False, 
-                                                   use_safetensors=True, custom_pipeline="lpw_stable_diffusion_xl")
-    #pipe.unet.load_attn_procs(lora_path)
-    pipe = pipe.to("cuda")
-    pipe.enable_attention_slicing()
-
-    pipe.load_textual_inversion("UnrealisticDream.pt")
-    #pipe.scheduler.config["use_karras_sigmas"] = True
-    pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
-    pipe.safety_checker = None
-    pipe.requires_safety_checker = False
 
         #protovision - 896x1152 and nightvision 832x1216
     image = pipe(prompt= prompt, negative_prompt=negative_prompt, num_images_per_prompt = 1, 
