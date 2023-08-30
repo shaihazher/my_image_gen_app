@@ -45,10 +45,7 @@ def gen_image(jobs):
 
     cmd = ['python', 'GFPGAN/inference_gfpgan.py', '-i', img_name, '-o', 'results', '-v', '1.3', '-s', '2']
 
-    try:
-        subprocess.run(cmd, check=True)
-    except subprocess.CalledProcessError as e:
-        return f"Oops! Something went wrong: {e}"
+    subprocess.run(cmd, check=True)
 
     # Open image file
     with open("results/restored_imgs/"+img_name, "rb") as image_file:
