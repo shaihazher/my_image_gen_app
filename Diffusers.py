@@ -29,7 +29,7 @@ def gen_image(jobs):
     negative_prompt = ""
 
     #nprompt = """UnrealisticDream {neg}"""
-    nprompt = "ugly, deformed, noisy, blurry, distorted, grainy"
+    nprompt = "bad fingers, extra fingers, fused fingers, UnrealisticDream"
     pprompt = """Portrait photo of (Breathtaking) wet and (curvy) Kerala woman with (plump big belly:1.2) in rainy beach, 
     wearing (wet) saree, 
     {pos}, with cleavage and (curvy fat hips) exposed"""
