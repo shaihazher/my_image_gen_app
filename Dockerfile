@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y wget
 
 # Copy requirements.txt and install dependencies
 COPY requirements.txt .
+RUN apt-get update && apt-get install -y libgl1-mesa-glx && rm -rf /var/lib/apt/lists/*
 RUN pip install -v -r requirements.txt
 
 # Copy all other files and directories
