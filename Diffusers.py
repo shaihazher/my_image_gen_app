@@ -51,7 +51,7 @@ def gen_image(jobs):
         return f"Oops! Something went wrong: {e}"
 
     # Open image file
-    with open("results/restored_imgs"+img_name, "rb") as image_file:
+    with open("results/restored_imgs/"+img_name, "rb") as image_file:
         # Read the file
         image_data = image_file.read()
 
