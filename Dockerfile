@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y wget git
 # Clone GFPGAN and install its dependencies
 RUN git clone https://github.com/TencentARC/GFPGAN.git
 # Set permissions just in case
-RUN chmod -R 777 /GFPGAN
+RUN mkdir -p /GFPGAN/weights && chmod 777 /GFPGAN/weights
 RUN cd GFPGAN && \
     pip install basicsr && \
     pip install facexlib && \
