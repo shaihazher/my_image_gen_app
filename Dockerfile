@@ -4,8 +4,17 @@ FROM python:3.11.1-buster
 # Define your working directory
 WORKDIR /
 
-# Install wget
-RUN apt-get update && apt-get install -y wget
+# Install wget and git
+RUN apt-get update && apt-get install -y wget git
+
+# Clone GFPGAN and install its dependencies
+RUN git clone https://github.com/TencentARC/GFPGAN.git
+RUN cd GFPGAN && \
+    pip install basicsr && \
+    pip install facexlib && \
+    pip install -r requirements.txt && \
+    python setup.py develop && \
+    pip install realesrgan
 
 # Copy requirements.txt and install dependencies
 COPY requirements.txt .
@@ -24,7 +33,6 @@ RUN gdown --id 1pQXZl-0qLDCy1hC0wVvvEEwJtPtr-ODu -O /GFPGAN/weights/detection_Re
 RUN gdown --id 1_vUNbqM5v6cbPVVh8KUCKeD3xTdtaPdv -O /GFPGAN/weights/parsing_parsenet.pth
 RUN gdown --id 1_vUNbqM5v6cbPVVh8KUCKeD3xTdtaPdv -O /GFPGAN/experiments/pretrained_models/GFPGANv1.3.pth
 RUN gdown --id 1_vUNbqM5v6cbPVVh8KUCKeD3xTdtaPdv -O /GFPGAN/gfpgan/weights/GFPGANv1.3.pth
-
 
 # Call your file when your container starts
 CMD [ "python", "-u", "Diffusers.py" ]
