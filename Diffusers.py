@@ -10,7 +10,7 @@ from PIL import Image
 from io import BytesIO
 #nest_asyncio.apply()
 
-pipe = StableDiffusionXLPipeline.from_single_file("epicrealism_naturalSinRC1VAE.safetensors", 
+pipe = StableDiffusionPipeline.from_single_file("epicrealism_naturalSinRC1VAE.safetensors", 
                                                    safety_checker = None, requires_safety_checker = False, 
                                                    use_safetensors=True, custom_pipeline="lpw_stable_diffusion_xl")
 #pipe.unet.load_attn_procs(lora_path)
