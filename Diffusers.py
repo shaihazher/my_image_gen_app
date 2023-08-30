@@ -43,12 +43,8 @@ def gen_image(jobs):
     image[0].save(str(job_input["prompt"])+".png")
     img_name = str(job_input["prompt"])+".png"
 
-    cmd = ['python', 'GFPGAN/inference_gfpgan.py', '-i', img_name, '-o', 'results', '-v', '1.3', '-s', '2']
-
-    subprocess.run(cmd, check=True)
-
     # Open image file
-    with open("results/restored_imgs/"+img_name, "rb") as image_file:
+    with open(img_name, "rb") as image_file:
         # Read the file
         image_data = image_file.read()
 
