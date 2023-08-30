@@ -12,7 +12,7 @@ from io import BytesIO
 
 pipe = StableDiffusionPipeline.from_single_file("epicrealism_naturalSinRC1VAE.safetensors", 
                                                    safety_checker = None, requires_safety_checker = False, 
-                                                   use_safetensors=True, custom_pipeline="lpw_stable_diffusion_xl")
+                                                   use_safetensors=True, custom_pipeline="lpw_stable_diffusion")
 #pipe.unet.load_attn_procs(lora_path)
 pipe = pipe.to("cuda")
 pipe.enable_attention_slicing()
