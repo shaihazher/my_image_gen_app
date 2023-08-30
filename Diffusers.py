@@ -27,7 +27,7 @@ def gen_image(jobs):
                                                    safety_checker = None, requires_safety_checker = False, 
                                                    use_safetensors=True, custom_pipeline="lpw_stable_diffusion_xl")
     #pipe.unet.load_attn_procs(lora_path)
-    pipe = pipe.to("mps")
+    pipe = pipe.to("cuda")
     pipe.enable_attention_slicing()
 
     pipe.load_textual_inversion("UnrealisticDream.pt")
@@ -48,7 +48,7 @@ def gen_image(jobs):
     try:
         subprocess.run(cmd, check=True)
     except subprocess.CalledProcessError as e:
-        print(f"Oops! Something went wrong: {e}")
+        return f"Oops! Something went wrong: {e}"
 
     # Open image file
     with open("results/restored_imgs"+img_name, "rb") as image_file:
