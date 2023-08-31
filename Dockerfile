@@ -19,7 +19,7 @@ RUN pip install gdown
 # Download and unzip the cached models from Google Drive
 RUN gdown --id 1ZQFB3p2O0GoVOCVtKiw_7qkAp_rSZmaE -O /tmp/hub.zip
 RUN unzip /tmp/hub.zip -d /root/.cache/huggingface
-RUN rm /tmp/huggingface_cache.zip
+RUN rm /tmp/hub.zip
 
 # Copy all other files and directories
 COPY . .
